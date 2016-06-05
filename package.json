@@ -1,0 +1,25 @@
+{
+  "name": "codenames",
+  "version": "1.0.0",
+  "description": "an online version of an excellent game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cghobbs/codenames.git"
+  },
+  "author": "Chris Geoghegan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cghobbs/codenames/issues"
+  },
+  "homepage": "https://github.com/cghobbs/codenames#readme",
+  "dependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  }
+}
