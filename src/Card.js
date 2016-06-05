@@ -17,7 +17,7 @@ class Card extends React.Component {
     classes += this.props.spymaster ? ' spymaster' : '';
     return (
       <div className={classes} onClick={this.revealCard}>
-      	{this.props.card.text}
+      	{this.props.card.text} <span>✔</span>
       </div>
     );
   }

@@ -12919,8 +12919,7 @@ module.exports={
     "tmp": "tmp/elliptic-6.2.8.tgz_1464746004719_0.6379144776146859"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.2.8.tgz",
-  "readme": "ERROR: No README data found!"
+  "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.2.8.tgz"
 }
 
 },{}],65:[function(require,module,exports){
@@ -41389,10 +41388,10 @@ class App extends React.Component {
 
   getCards() {
     const teams = this.getTeams();
-    let selected = [];
+    let selected = []
     for (let i = 0; i < 25; i++) {
       selected.push({
-        _id: i + 1,
+        _id: i+1,
         text: Cards[Math.floor(Cards.length * this.state.rng())],
         color: teams[i]
       });
@@ -41402,21 +41401,13 @@ class App extends React.Component {
 
   getTeams() {
     const teams = ["black"];
-    do {
-      teams.push("neutral");
-    } while (teams.length < 8);
-    do {
-      teams.push("blue");
-    } while (teams.length < 16);
-    do {
-      teams.push("red");
-    } while (teams.length < 24);
-    whoStarts = Math.floor(this.state.rng() * 2) ? 'blue' : 'red';
+    do { teams.push("neutral"); } while (teams.length < 8);
+    do { teams.push("blue"); } while (teams.length < 16);
+    do { teams.push("red"); } while (teams.length < 24);
+    whoStarts = Math.floor(this.state.rng()*2) ? 'blue' : 'red';
     teams.push(whoStarts);
 
-    let currentIndex = teams.length,
-        temporaryValue,
-        randomIndex;
+    let currentIndex = teams.length, temporaryValue, randomIndex;
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
       // Pick a remaining element...
@@ -41432,11 +41423,13 @@ class App extends React.Component {
 
   newGame(e) {
     e.preventDefault();
-    this.setState({ rng: SeedRandom(this.refs.textInput.value.trim()) });
+    this.setState({rng: SeedRandom(this.refs.textInput.value.trim())});
   }
 
   renderCards(cards) {
-    return cards.map(card => React.createElement(Card, { key: card._id, card: card, spymaster: this.state.spymaster }));
+    return cards.map((card) => (
+      React.createElement(Card, {key: card._id, card: card, spymaster: this.state.spymaster})
+    ));
   }
 
   toggleSpymaster(e) {
@@ -41444,39 +41437,24 @@ class App extends React.Component {
       rng: SeedRandom(this.refs.textInput.value.trim()),
       spymaster: !this.state.spymaster
     });
-    console.log(this.refs.textInput.value);
+    console.log(this.refs.textInput.value)
   }
 
   render() {
     let thedeal = this.getCards();
-    return React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'div',
-        { className: 'header' },
-        React.createElement(
-          'form',
-          { className: 'new-game', onSubmit: this.newGame.bind(this) },
-          React.createElement('input', { type: 'text', ref: 'textInput', defaultValue: this.props.seed }),
-          '  ',
-          React.createElement('input', { type: 'submit', value: 'Start Game' }),
-          '  ',
-          React.createElement('input', { type: 'button', value: 'Toggle Spymaster', onClick: this.toggleSpymaster.bind(this) }),
-          '  ',
-          React.createElement(
-            'span',
-            { className: whoStarts },
-            'The ',
-            whoStarts,
-            ' team goes first.'
+    return (
+      React.createElement("div", null, 
+        React.createElement("div", {className: "header"}, 
+          React.createElement("form", {className: "new-game", onSubmit: this.newGame.bind(this)}, 
+            React.createElement("input", {type: "text", ref: "textInput", defaultValue: this.props.seed}), "  ", 
+            React.createElement("input", {type: "submit", value: "Start Game"}), "  ", 
+            React.createElement("input", {type: "button", value: "Toggle Spymaster", onClick: this.toggleSpymaster.bind(this)}), "  ", 
+            React.createElement("span", {className: whoStarts}, "The ", whoStarts, " team goes first.")
           )
+        ), 
+        React.createElement("div", {className: "board"}, 
+          this.renderCards(thedeal)
         )
-      ),
-      React.createElement(
-        'div',
-        { className: 'board' },
-        this.renderCards(thedeal)
       )
     );
   }
@@ -41491,21 +41469,21 @@ var ReactDOM = require('react-dom');
 class Card extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { revealed: false };
+    this.state = {revealed: false};
     this.revealCard = this.revealCard.bind(this);
   }
   revealCard() {
-    this.setState({ revealed: !this.state.revealed });
+  	this.setState({revealed: !this.state.revealed });
     console.log("clicked");
   }
   render() {
-    let classes = 'card ' + this.props.card.color;
+    let classes = 'card '+this.props.card.color;
     classes += this.state.revealed ? ' revealed' : '';
     classes += this.props.spymaster ? ' spymaster' : '';
-    return React.createElement(
-      'div',
-      { className: classes, onClick: this.revealCard },
-      this.props.card.text
+    return (
+      React.createElement("div", {className: classes, onClick: this.revealCard}, 
+      	this.props.card.text, " ", React.createElement("span", null, "✔")
+      )
     );
   }
 }
@@ -41513,21 +41491,24 @@ class Card extends React.Component {
 Card.propTypes = {
   // This component gets the task to display through a React prop.
   // We can use propTypes to indicate it is required
-  card: React.PropTypes.object.isRequired
+  card: React.PropTypes.object.isRequired,
 };
 
 module.exports = Card;
 
 },{"react":387,"react-dom":222}],398:[function(require,module,exports){
-var Cards = ["account", "achiever", "acoustics", "act", "action", "activity", "actor", "addition", "adjustment", "advertisement", "advice", "aftermath", "afternoon", "afterthought", "agreement", "air", "airplane", "airport", "alarm", "amount", "amusement", "anger", "angle", "animal", "answer", "ant", "ants", "apparatus", "apparel", "apple", "apples ", "appliance", "approval", "arch", "argument", "arithmetic", "arm", "army", "art", "attack", "attempt", "attention", "attraction", "aunt", "authority", "babies ", "baby ", "back", "badge", "bag", "bait", "balance", "ball", "balloon", "balls ", "banana", "band", "base", "baseball", "basin", "basket", "basketball", "bat", "bath", "battle", "bead", "beam", "bean", "bear", "bears ", "beast", "bed", "bedroom", "beds ", "bee", "beef", "beetle", "beggar", "beginner", "behavior", "belief", "believe", "bell", "bells ", "berry", "bike", "bikes ", "bird", "birds ", "birth", "birthday", "bit", "bite", "blade", "blood", "blow", "board", "boat", "boats ", "body", "bomb", "bone", "book", "books ", "boot", "border", "bottle", "boundary", "box", "boy", "boys ", "brain", "brake", "branch", "brass", "bread", "breakfast", "breath", "brick", "bridge", "brother", "brothers ", "brush", "bubble", "bucket", "building", "bulb", "bun", "burn", "burst", "bushes", "business", "butter", "button", "cabbage", "cable", "cactus", "cake", "cakes ", "calculator", "calendar", "camera", "camp", "can", "cannon", "canvas", "cap", "caption", "car ", "card", "care", "carpenter", "carriage", "cars ", "cart", "cast", "cat", "cats ", "cattle", "cause", "cave", "celery", "cellar", "cemetery", "cent", "chain", "chair ", "chairs ", "chalk", "chance", "change", "channel", "cheese", "cherries", "cherry", "chess", "chicken ", "chickens ", "children", "chin", "church", "circle", "clam", "class", "clock", "clocks ", "cloth", "cloud", "clouds ", "clover", "club", "coach", "coal", "coast", "coat", "cobweb", "coil", "collar", "color", "comb", "comfort", "committee", "company", "comparison", "competition", "condition", "connection", "control", "cook", "copper", "copy", "cord", "cork", "corn ", "cough", "country", "cover", "cow", "cows ", "crack", "cracker", "crate", "crayon", "cream", "creator", "creature", "credit", "crib", "crime", "crook", "crow", "crowd", "crown", "crush", "cry", "cub", "cup", "current", "curtain", "curve", "cushion", "dad", "daughter", "day", "death", "debt", "decision", "deer", "degree", "design", "desire", "desk", "destruction", "detail", "development", "digestion", "dime", "dinner", "dinosaurs ", "direction", "dirt", "discovery", "discussion", "disease", "disgust", "distance", "distribution", "division", "dock", "doctor", "dog", "dogs ", "doll", "dolls ", "donkey", "door", "downtown", "drain", "drawer", "dress", "drink", "driving", "drop", "drug", "drum", "duck ", "ducks ", "dust", "ear", "earth", "earthquake", "edge", "education", "effect", "egg", "eggnog", "eggs ", "elbow", "end", "engine", "error", "event", "example", "exchange", "existence", "expansion", "experience", "expert", "eye", "eyes", "face", "fact", "fairies ", "fall", "family", "fan", "fang ", "farm", "farmer ", "father", "father", "faucet", "fear", "feast", "feather", "feeling", "feet", "fiction", "field", "fifth", "fight", "finger", "finger", "fire ", "fireman", "fish", "flag", "flame", "flavor", "flesh", "flight", "flock", "floor", "flower", "flowers ", "fly", "fog", "fold", "food", "foot", "force", "fork", "form", "fowl", "frame", "friction", "friend", "friends ", "frog", "frogs ", "front", "fruit", "fuel", "furniture", "alley", "game", "garden", "gate", "geese", "ghost", "giants ", "giraffe", "girl", "girls ", "glass", "glove", "glue", "goat", "gold", "goldfish", "good-bye ", "goose", "government", "governor", "grade", "grain", "grandfather", "grandmother", "grape", "grass", "grip", "ground", "group", "growth", "guide", "guitar", "gun", "hair", "haircut", "hall", "hammer", "hand", "hands ", "harbor", "harmony", "hat", "hate", "head", "health", "hearing", "heart", "heat", "help", "hen", "hill ", "history", "hobbies", "hole", "holiday", "home ", "honey", "hook", "hope", "horn", "horse", "horses ", "hose", "hospital", "hot", "hour", "house", "houses ", "humor", "hydrant", "ice", "icicle", "idea", "impulse", "income", "increase", "industry", "ink", "insect", "instrument", "insurance", "interest", "invention", "iron", "island", "jail", "jam", "jar", "jeans", "jelly", "jellyfish", "jewel", "join", "joke", "journey", "judge", "juice", "jump", "kettle", "key", "kick", "kiss", "kite", "kitten", "kittens ", "kitty ", "knee", "knife", "knot", "knowledge", "laborer", "lace", "ladybug", "lake", "lamp", "land", "language", "laugh", "lawyer", "lead", "leaf", "learning", "leather", "leg ", "legs", "letter", "letters ", "lettuce", "level", "library", "lift", "light", "limit", "line", "linen", "lip", "liquid", "list", "lizards ", "loaf", "lock", "locket", "look", "loss", "love", "low", "lumber", "lunch", "lunchroom", "machine", "magic", "maid", "mailbox", "man", "manager", "map", "marble", "mark", "market", "mask", "mass", "match", "meal", "measure", "meat", "meeting", "memory", "men", "metal", "mice ", "middle", "milk", "mind", "mine", "minister", "mint", "minute", "mist", "mitten", "mom", "money", "monkey", "month", "moon", "morning", "mother", "motion", "mountain", "mouth", "move", "muscle", "music", "nail", "name", "nation", "neck", "need", "needle", "nerve", "nest ", "net", "news", "night", "noise", "north", "nose", "note", "notebook", "number", "nut", "oatmeal", "observation", "ocean", "offer", "office", "oil", "operation", "opinion", "orange", "oranges ", "order", "organization", "ornament", "oven", "owl", "owner", "page", "pail", "pain", "paint", "pan", "pancake", "paper", "parcel", "parent", "park", "part", "partner", "party", "passenger", "paste", "patch", "payment", "peace", "pear", "pen", "pencil", "person", "pest", "pet", "pets ", "pickle", "picture", "pie", "pies ", "pig", "pigs ", "pin", "pipe", "pizzas ", "place", "plane", "planes ", "plant", "plantation", "plants ", "plastic", "plate", "play", "playground", "pleasure", "plot", "plough", "pocket", "point", "poison", "police", "polish", "pollution", "popcorn", "porter", "position", "pot", "potato", "powder", "power", "price", "print", "prison", "process", "produce", "profit", "property", "prose", "protest", "pull", "pump", "punishment", "purpose", "push", "quarter", "quartz", "queen", "question", "quicksand", "quiet", "quill", "quilt", "quince", "quiver", "rabbit ", "rabbits ", "rail", "railway", "rain", "rainstorm", "rake", "range", "rat", "rate", "ray", "reaction", "reading", "reason", "receipt", "recess", "record", "regret", "relation", "religion", "representative", "request", "respect", "rest", "reward", "rhythm", "rice", "riddle", "rifle", "ring", "rings ", "river", "road", "robin ", "rock", "rod", "roll", "roof", "room", "root", "rose", "route", "rub", "rule", "run", "sack", "sail", "salt", "sand", "scale", "scarecrow", "scarf", "scene", "scent", "school", "science", "scissors", "screw", "sea", "seashore", "seat", "secretary", "seed", "selection", "self", "sense", "servant", "shade", "shake", "shame", "shape", "sheep", "sheet", "shelf", "ship", "shirt", "shock", "shoe", "shoes ", "shop", "show", "side", "sidewalk", "sign", "silk", "silver", "sink", "sister", "sisters ", "size", "skate", "skin", "skirt", "sky", "slave", "sleep", "sleet", "slip", "slope", "smash", "smell", "smile", "smoke", "snail", "snails ", "snake", "snakes ", "sneeze", "snow", "soap", "society", "sock", "soda", "sofa", "son", "song", "songs ", "sort", "sound", "soup", "space", "spade", "spark", "spiders ", "sponge", "spoon", "spot", "spring", "spy", "square", "squirrel", "stage", "stamp", "star", "start", "statement", "station", "steam", "steel", "stem", "step", "stew", "stick", "sticks ", "stitch", "stocking", "stomach", "stone", "stop", "store", "story", "stove", "stranger", "straw", "stream", "street", "stretch", "string", "structure", "substance", "sugar", "suggestion", "suit", "summer", "sun", "support", "surprise", "sweater", "swim", "swing", "system", "table", "tail", "talk", "tank", "taste", "tax", "teaching", "team", "teeth ", "temper", "tendency", "tent", "territory", "test", "texture", "theory", "thing", "things ", "thought", "thread", "thrill", "throat", "throne", "thumb", "thunder", "ticket", "tiger", "time", "tin", "title", "toad", "toe", "toes", "tomatoes ", "tongue", "tooth", "toothbrush", "toothpaste", "top ", "touch", "town", "toy ", "toys ", "trade", "trail", "train", "trains ", "tramp", "transport", "tray", "treatment", "tree", "trees ", "trick", "trip", "trouble", "trousers", "truck", "trucks ", "tub", "turkey", "turn", "twig", "twist", "umbrella", "uncle", "underwear", "unit", "use", "vacation", "value", "van", "vase", "vegetable", "veil", "vein", "verse", "vessel", "vest", "view", "visitor", "voice", "volcano", "volleyball", "voyage", "walk", "wall", "war", "wash", "waste", "watch", "water", "wave", "waves ", "wax", "way", "wealth", "weather", "week", "weight", "wheel", "whip", "whistle", "wilderness", "wind ", "window ", "wine", "wing", "winter", "wire", "wish", "woman", "women", "wood", "wool", "word", "work", "worm", "wound", "wren", "wrench", "wrist", "writer", "writing", "yak", "yam", "yard", "yarn", "year", "yoke", "zebra ", "zephyr", "zinc", "zipper", "zoo"];
+var Cards = ["account","achiever","acoustics","act","action","activity","actor","addition","adjustment","advertisement","advice","aftermath","afternoon","afterthought","agreement","air","airplane","airport","alarm","amount","amusement","anger","angle","animal","answer","ant","ants","apparatus","apparel","apple","apples ","appliance","approval","arch","argument","arithmetic","arm","army","art","attack","attempt","attention","attraction","aunt","authority","babies ","baby ","back","badge","bag","bait","balance","ball","balloon","balls ","banana","band","base","baseball","basin","basket","basketball","bat","bath","battle","bead","beam","bean","bear","bears ","beast","bed","bedroom","beds ","bee","beef","beetle","beggar","beginner","behavior","belief","believe","bell","bells ","berry","bike","bikes ","bird","birds ","birth","birthday","bit","bite","blade","blood","blow","board","boat","boats ","body","bomb","bone","book","books ","boot","border","bottle","boundary","box","boy","boys ","brain","brake","branch","brass","bread","breakfast","breath","brick","bridge","brother","brothers ","brush","bubble","bucket","building","bulb","bun","burn","burst","bushes","business","butter","button","cabbage","cable","cactus","cake","cakes ","calculator","calendar","camera","camp","can","cannon","canvas","cap","caption","car ","card","care","carpenter","carriage","cars ","cart","cast","cat","cats ","cattle","cause","cave","celery","cellar","cemetery","cent","chain","chair ","chairs ","chalk","chance","change","channel","cheese","cherries","cherry","chess","chicken ","chickens ","children","chin","church","circle","clam","class","clock","clocks ","cloth","cloud","clouds ","clover","club","coach","coal","coast","coat","cobweb","coil","collar","color","comb","comfort","committee","company","comparison","competition","condition","connection","control","cook","copper","copy","cord","cork","corn ","cough","country","cover","cow","cows ","crack","cracker","crate","crayon","cream","creator","creature","credit","crib","crime","crook","crow","crowd","crown","crush","cry","cub","cup","current","curtain","curve","cushion","dad","daughter","day","death","debt","decision","deer","degree","design","desire","desk","destruction","detail","development","digestion","dime","dinner","dinosaurs ","direction","dirt","discovery","discussion","disease","disgust","distance","distribution","division","dock","doctor","dog","dogs ","doll","dolls ","donkey","door","downtown","drain","drawer","dress","drink","driving","drop","drug","drum","duck ","ducks ","dust","ear","earth","earthquake","edge","education","effect","egg","eggnog","eggs ","elbow","end","engine","error","event","example","exchange","existence","expansion","experience","expert","eye","eyes","face","fact","fairies ","fall","family","fan","fang ","farm","farmer ","father","father","faucet","fear","feast","feather","feeling","feet","fiction","field","fifth","fight","finger","finger","fire ","fireman","fish","flag","flame","flavor","flesh","flight","flock","floor","flower","flowers ","fly","fog","fold","food","foot","force","fork","form","fowl","frame","friction","friend","friends ","frog","frogs ","front","fruit","fuel","furniture","alley","game","garden","gate","geese","ghost","giants ","giraffe","girl","girls ","glass","glove","glue","goat","gold","goldfish","good-bye ","goose","government","governor","grade","grain","grandfather","grandmother","grape","grass","grip","ground","group","growth","guide","guitar","gun","hair","haircut","hall","hammer","hand","hands ","harbor","harmony","hat","hate","head","health","hearing","heart","heat","help","hen","hill ","history","hobbies","hole","holiday","home ","honey","hook","hope","horn","horse","horses ","hose","hospital","hot","hour","house","houses ","humor","hydrant","ice","icicle","idea","impulse","income","increase","industry","ink","insect","instrument","insurance","interest","invention","iron","island","jail","jam","jar","jeans","jelly","jellyfish","jewel","join","joke","journey","judge","juice","jump","kettle","key","kick","kiss","kite","kitten","kittens ","kitty ","knee","knife","knot","knowledge","laborer","lace","ladybug","lake","lamp","land","language","laugh","lawyer","lead","leaf","learning","leather","leg ","legs","letter","letters ","lettuce","level","library","lift","light","limit","line","linen","lip","liquid","list","lizards ","loaf","lock","locket","look","loss","love","low","lumber","lunch","lunchroom","machine","magic","maid","mailbox","man","manager","map","marble","mark","market","mask","mass","match","meal","measure","meat","meeting","memory","men","metal","mice ","middle","milk","mind","mine","minister","mint","minute","mist","mitten","mom","money","monkey","month","moon","morning","mother","motion","mountain","mouth","move","muscle","music","nail","name","nation","neck","need","needle","nerve","nest ","net","news","night","noise","north","nose","note","notebook","number","nut","oatmeal","observation","ocean","offer","office","oil","operation","opinion","orange","oranges ","order","organization","ornament","oven","owl","owner","page","pail","pain","paint","pan","pancake","paper","parcel","parent","park","part","partner","party","passenger","paste","patch","payment","peace","pear","pen","pencil","person","pest","pet","pets ","pickle","picture","pie","pies ","pig","pigs ","pin","pipe","pizzas ","place","plane","planes ","plant","plantation","plants ","plastic","plate","play","playground","pleasure","plot","plough","pocket","point","poison","police","polish","pollution","popcorn","porter","position","pot","potato","powder","power","price","print","prison","process","produce","profit","property","prose","protest","pull","pump","punishment","purpose","push","quarter","quartz","queen","question","quicksand","quiet","quill","quilt","quince","quiver","rabbit ","rabbits ","rail","railway","rain","rainstorm","rake","range","rat","rate","ray","reaction","reading","reason","receipt","recess","record","regret","relation","religion","representative","request","respect","rest","reward","rhythm","rice","riddle","rifle","ring","rings ","river","road","robin ","rock","rod","roll","roof","room","root","rose","route","rub","rule","run","sack","sail","salt","sand","scale","scarecrow","scarf","scene","scent","school","science","scissors","screw","sea","seashore","seat","secretary","seed","selection","self","sense","servant","shade","shake","shame","shape","sheep","sheet","shelf","ship","shirt","shock","shoe","shoes ","shop","show","side","sidewalk","sign","silk","silver","sink","sister","sisters ","size","skate","skin","skirt","sky","slave","sleep","sleet","slip","slope","smash","smell","smile","smoke","snail","snails ","snake","snakes ","sneeze","snow","soap","society","sock","soda","sofa","son","song","songs ","sort","sound","soup","space","spade","spark","spiders ","sponge","spoon","spot","spring","spy","square","squirrel","stage","stamp","star","start","statement","station","steam","steel","stem","step","stew","stick","sticks ","stitch","stocking","stomach","stone","stop","store","story","stove","stranger","straw","stream","street","stretch","string","structure","substance","sugar","suggestion","suit","summer","sun","support","surprise","sweater","swim","swing","system","table","tail","talk","tank","taste","tax","teaching","team","teeth ","temper","tendency","tent","territory","test","texture","theory","thing","things ","thought","thread","thrill","throat","throne","thumb","thunder","ticket","tiger","time","tin","title","toad","toe","toes","tomatoes ","tongue","tooth","toothbrush","toothpaste","top ","touch","town","toy ","toys ","trade","trail","train","trains ","tramp","transport","tray","treatment","tree","trees ","trick","trip","trouble","trousers","truck","trucks ","tub","turkey","turn","twig","twist","umbrella","uncle","underwear","unit","use","vacation","value","van","vase","vegetable","veil","vein","verse","vessel","vest","view","visitor","voice","volcano","volleyball","voyage","walk","wall","war","wash","waste","watch","water","wave","waves ","wax","way","wealth","weather","week","weight","wheel","whip","whistle","wilderness","wind ","window ","wine","wing","winter","wire","wish","woman","women","wood","wool","word","work","worm","wound","wren","wrench","wrist","writer","writing","yak","yam","yard","yarn","year","yoke","zebra ","zephyr","zinc","zipper","zoo"];
 module.exports = Cards;
 
 },{}],399:[function(require,module,exports){
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Random = require('random-gen');
-var App = require('./App');
+var App = require('./App')
 
-ReactDOM.render(React.createElement(App, { seed: Random.alphaNum(4) }), document.getElementById('app'));
+ReactDOM.render(
+  React.createElement(App, {seed: Random.alphaNum(4)}),
+  document.getElementById('app')
+);
 
 },{"./App":396,"random-gen":221,"react":387,"react-dom":222}]},{},[399]);
