@@ -36,4 +36,4 @@ node_modules
 .DS_Store
 
 #SASS
-.sass_cache
+.sass-cache
