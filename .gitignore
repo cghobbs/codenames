@@ -34,3 +34,6 @@ node_modules
 
 # OSX
 .DS_Store
+
+#SASS
+.sass-cache
