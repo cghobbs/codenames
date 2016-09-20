@@ -3,7 +3,9 @@
 ## Development
 
 `npm install` - to install dependencies
+
 `grunt` - will watch for changes to CSS and JS files and build automatically
+
 `grunt build` - builds CSS and JS for publishing
 
 ## Game Rules
@@ -18,3 +20,7 @@
 - The turn is over when they get one wrong or they use up all their guesses. The number of guesses you get is the number the spymaster says plus a bonus guess.
 - You can choose to stop guessing at any time.
 - The game ends when a team guesses all cards of their color or if the black card is chosen.
+
+## Credits
+
+- "disguise" icon by Helen Tseng from the Noun Project
